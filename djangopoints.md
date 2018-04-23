@@ -143,3 +143,5 @@ def addstudent(request):
 ```
 
 8、刷新页面127.0.0.1:8080/stu/add
+
+推荐一篇文章《Django基于ORM操作数据库的方法详解》http://www.aspku.com/tech/jiaoben/python/307274.html
