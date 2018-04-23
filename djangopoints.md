@@ -80,7 +80,7 @@ urlpatterns = [
 python manage.py makemigrations
 python manage.py migrate
 
-### MVT的简单连接
+### MVT的简单操作
 1.先建立一个叫stu的app，在settings的INSTALLED_APPS里面添加该app
 
 python manage.py startapp stu
