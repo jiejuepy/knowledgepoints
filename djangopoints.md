@@ -18,13 +18,16 @@ virtualenv虚拟环境创建指南
 
 使用背景：有些项目是老版本，需要引入虚拟环境将每个项目环境隔离起来
 
-pip install virtualenv虚拟环境创建,纯净环境，没有其他库
+pip install virtualenv虚拟环境创建
 
 在D盘创建了env文件夹
 ```
-virtualenv --no-site-packages testenv 创建了testenv虚拟环境
+virtualenv --no-site-packages testenv 创建了testenv虚拟环境，纯净环境
 ```
+Windows
 进入虚拟环境env/testenv/Scripts/activate
+Linux
+source bin/activate 退出source deactive
 
 在里面可以pip安装我们需要的库
 
@@ -45,22 +48,27 @@ python manage.py runserver
 
 修改settings.py 里面的LANGUAGE_CODE = 'zh-hans'页面改成中文
 
-python manage.py runserver ip:端口 启动django项目
+python manage.py runserver ip:端口 启动django项目(ip和端口可以不写，默认8000端口)
 
 1.pycharm里面settings选择我们自己创建的虚拟环境解释器
 2.配置debug
-run > debug> edit configuration > 添加个python >配置script path > parameters
+run > debug> edit configuration > +添加个python >配置script path：manage > parameters ：runserver 8080
+
+* __init__.py:初始化，配置MySQL连接
+* settings.py:配置信息位置，databases等
+* urls.py:路由
+* wsgi.py:网关
+* admin.py管理后台注册模型
 
 创建app
 python manage.py startapp app(name)
 
 app
-* __init__.py:初始化
-* admin.py管理后台注册模型
 * apps.py:settings.py里面注册app时需要使用到，一般不推荐这样使用
 * from app.apps import AppConfig
 * AppConfig.name
 * models.py:写模型的地方
+* db_tables:定义数据库中的表
 * views.py:写处理业务逻辑的地方
 
 
@@ -145,3 +153,82 @@ def addstudent(request):
 8、刷新页面127.0.0.1:8080/stu/add
 
 推荐一篇文章《Django基于ORM操作数据库的方法详解》http://www.aspku.com/tech/jiaoben/python/307274.html
+
+
+创建超级管理员
+python manage.py createsuperuser
+
+admin.py管理后台注册模型
+
+注册的第一种方式
+admin.site.register()
+
+注册的第二种方式 装饰器
+@admin.register()
+
+### 保持数据
+```
+stu = Student()
+stu.name = 'xxx'
+stu.save()
+```
+ORM 对象关系映射，翻译机
+
+### 模式字段
+* CharField(max_length=6):字符串
+* BooleanField()：布尔类型
+* DateField()：年月日，日期
+* auto_now_add=True：第一次创建的时候赋值
+* auto_now=True：每次修改的日期
+* DataTimeField:年月日时分秒
+* AutoField:自动增长
+* DecimalField(max_digits=3, decimal_places=1)
+	* max_digits：总位数
+	*　decimal_places：小数后有几位
+* TextField:存长文本信息
+* IntegerField:整数
+* FloatField：浮点型
+* FileFiled:文件上传字段
+* ImageField():上传图片
+	* upload_to=''指定上传图片的路径
+
+### 模型参数
+default：默认值
+null = True 数据库该字段可以为空
+blank = True 网页表单填写的内容可以为空
+
+primary_key(True/False):创建主键
+unique(True/False)：唯一
+
+如果在models修改字段名字，再执行迁移就更新了
+
+在工程下面创建一个dictionary：templates
+在settings下：'DIRS': [os.path.join(BASE_DIR, 'templates')]
+
+objects 对象方法
+通过模型.objects 来实现对数据的CRUD
+
+select * from student;
+模型.objects.all()
+
+区别：get 和filter
+
+get:返回一个满足条件的对象，没有满足条件的则直接报DoesNotExit的异常，如果查询结果有多个数据的话，就报MulitiObjectsReturned
+
+filter()：返回满足条件的结果 
+
+first()：返回第一条数据
+
+last()：返回最后一条数据
+
+count()：求和
+
+gt大于 / gte大于等于
+
+lt小于 / lte小于等于
+
+from django.db.models import F，Q
+F():操作数据表中的某列值，F()允许Django在未实际链接数据的情况下具有对数据库字段的值的引用，不用获取对象放在内存中再对字段进行操作，直接执行原生产sql语句操作。<br>
+Q():对对象进行复杂查询，并支持&（and）,|（or），~（not）操作符。
+
+
