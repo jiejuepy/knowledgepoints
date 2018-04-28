@@ -53,7 +53,7 @@ cookie: 在浏览器
 session: 在服务器
 
 set_cookie(key, value, expire)(名字，值，过期时间)
-![]https://github.com/jiejuepy/knowledgepoints/blob/master/pictures/cookie.jpg
+![](https://github.com/jiejuepy/knowledgepoints/blob/master/pictures/cookie.jpg)
 
 del_cookie
 
