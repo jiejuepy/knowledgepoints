@@ -91,10 +91,8 @@ pip install uwsgi
 	server {
 	    listen       80;
 	    server_name 47.92.164.198 localhost;
-
 	    access_log /home/app/log/access.log;
 	    error_log /home/app/log/error.log;
-
 	    location / {
 	        include uwsgi_params;
 	        uwsgi_pass 127.0.0.1:8890;
