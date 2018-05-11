@@ -15,10 +15,11 @@ mysql -u root -p
 		/etc/mysql/mysql.conf.d
 
 	c) 切换数据库
-	进入mysql，输入以下命令：root@123是自己的密码
+	进入mysql，输入以下命令,root@123是自己的密码:
+
 	GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root@123' WITH GRANT OPTION;
 
-		flush privileges; 
+	flush privileges; 
 
 3. 修改django的配置文件
 
@@ -31,9 +32,9 @@ mysql -u root -p
 	url(r'^static/(?P<path>.*)$', serve, {"document_root": settings.STATIC_ROOT}),
 	url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
 ```
-	* b2) setting中STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+	b2) setting中STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-	* b3) url中修改首页访问的地址 
+	b3) url中修改首页访问的地址 
 ```
 	<u></u>rl(r'^$', views.home)
 ```
@@ -67,11 +68,11 @@ sudo apt-get install nginx
 	
 2. 查看nginx的状态
 
-systemctl status nginx 查看nginx的状态
+	* systemctl status nginx 查看nginx的状态
 
-systemctl start/stop/enable/disable nginx 启动/关闭/设置开机启动/禁止开机启动
+	* systemctl start/stop/enable/disable nginx 启动/关闭/设置开机启动/禁止开机启动
 
-service nginx status/stop/restart/start
+	* service nginx status/stop/restart/start
 
 
 
@@ -102,12 +103,11 @@ pip install uwsgi
 	        alias /home/app/day11axf0/static/;
 	        expires 30d;
 	    }
-
 	}
 
 
 6. 配置uwsgi，名称为uwsgi.ini
-
+```
 	[uwsgi]
 	# variables
 	projectname = day11axf0
@@ -124,7 +124,7 @@ pip install uwsgi
 	module = %(newprojectname).wsgi
 	socket = 127.0.0.1:8890
 	logto = %(base)/log/uwsgi.log
-
+```
 
 启动方式： uwsgi --ini uwsgi.ini
 
