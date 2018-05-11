@@ -36,7 +36,7 @@ mysql -u root -p
 
 	b3) url中修改首页访问的地址 
 ```
-	<u></u>rl(r'^$', views.home)
+	url(r'^$', views.home)
 ```
 
 
