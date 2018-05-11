@@ -87,9 +87,9 @@ pip install uwsgi
 
 
 5. 配置自定义的nginx配置文件
-
+```
 	server {
-	    listen       80;
+	    listen  80;
 	    server_name 47.92.164.198 localhost;
 	    access_log /home/app/log/access.log;
 	    error_log /home/app/log/error.log;
@@ -102,7 +102,7 @@ pip install uwsgi
 	        expires 30d;
 	    }
 	}
-
+```
 
 6. 配置uwsgi，名称为uwsgi.ini
 ```
