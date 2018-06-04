@@ -24,7 +24,6 @@ mysql -u root -p
 3. 修改django的配置文件
 
 	a)修改settings.py文件中的DEBUG=FALSE, ALLOWED_HOST=["*"]
-
 	b)修改urls.py
  	* b1) from django.views.static import serve
 ```
@@ -33,13 +32,10 @@ mysql -u root -p
 	url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
 ```
 	b2) setting中STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-	b3) url中修改首页访问的地址 
+	b3)url中修改首页访问的地址 
 ```
 	url(r'^$', views.home)
 ```
-
-
 4. 修改首页的启动地址
 	修改工程目录中的url ，并修改url(r'^$', views.home)
 
@@ -84,8 +80,6 @@ pip install uwsgi
 	vim /etc/nginx/nginx.conf
 	在server中加入以下配置：
 	include /home/app/conf/*.conf;
-
-
 5. 配置自定义的nginx配置文件
 ```
 	server {
